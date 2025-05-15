@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3 Meses de Amor - Juanpa & Stephanie</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@400;600&display=swap');
+        
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #fff5f7;
+            font-family: 'Montserrat', sans-serif;
+            overflow-x: hidden;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+        }
+        
+        h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3.5rem;
+            color: #ff6b8b;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .photo-frame {
+            width: 300px;
+            height: 300px;
+            margin: 30px auto;
+            border: 15px solid white;
+            border-radius: 5px;
+            box-shadow: 0 10px 30px rgba(255, 105, 140, 0.3);
+            overflow: hidden;
+            position: relative;
+            transform: rotate(-3deg);
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .photo-frame:hover {
+            transform: rotate(0deg) scale(1.05);
+        }
+        
+        .photo-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .message {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin: 40px 0;
+            position: relative;
+            text-align: left;
+            line-height: 1.8;
+        }
+        
+        .message:before {
+            content: """;
+            font-family: 'Dancing Script', cursive;
+            font-size: 5rem;
+            color: #ffccd5;
+            position: absolute;
+            top: -20px;
+            left: 10px;
+            line-height: 1;
+        }
+        
+        .signature {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2rem;
+            color: #ff6b8b;
+            margin-top: 20px;
+            text-align: right;
+        }
+        
+        .hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .heart {
+            position: absolute;
+            opacity: 0;
+            animation: float 6s ease-in infinite;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        .date-counter {
+            background: linear-gradient(45deg, #ff6b8b, #ffb3c1);
+            color: white;
+            padding: 15px;
+            border-radius: 50px;
+            display: inline-block;
+            margin: 20px 0;
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(255, 107, 139, 0.3);
+        }
+        
+        .footer {
+            margin-top: 50px;
+            font-size: 0.9rem;
+            color: #888;
+        }
+        
+        /* Estilos para el modal del corazón */
+        .heart-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 245, 247, 0.95);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .big-heart {
+            font-size: 15rem;
+            color: #ff6b8b;
+            animation: pulse 2s infinite;
+            margin-bottom: 30px;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        .heart-message {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3rem;
+            color: #ff6b8b;
+            text-align: center;
+            max-width: 80%;
+            margin: 0 auto;
+        }
+        
+        .close-heart {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            font-size: 2rem;
+            color: #ff6b8b;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="hearts" id="hearts"></div>
+    
+    <!-- Modal del corazón (oculto inicialmente) -->
+    <div class="heart-modal" id="heartModal">
+        <button class="close-heart" id="closeHeart">×</button>
+        <div class="big-heart">❤️</div>
+        <div class="heart-message">Mi amor por ti es infinito... Stephanie</div>
+    </div>
+    
+    <div class="container">
+        <h1>Feliz 3 Meses, Mi Amor</h1>
+        
+        <div class="date-counter">
+            ❤️  días juntos ❤️
+        </div>
+        
+        <div class="photo-frame" id="photoFrame">
+            <img src="ste.jpg" alt="Juanpa y Stephanie">
+        </div>
+        
+        <div class="message">
+            <p>Stephanie María de Fátima Forquita Cruz</p>
+            
+            <p>Hoy celebramos 3 meses de una historia que apenas comienza... este corto tiempo ha llenado mi vida de colores que nunca antes había visto... cada momento que paso contigo es un regalo que atesoro con todo mi corazón.</p>
+            
+            <p>Aún recuerdo la primera vez que te vi, te invite a formar parte de la familia del taekwondo universitario... pero pronto descubri que te ganaste un parte de mi corazón... ademas recuerdo cómo tu sonrisa iluminó todo a tu alrededor ahi se convirtio en mi lugar favorito...  y ahora despues de todo este tiempo esa misma sonrisa sigue siendo mi lugar favorito en el mundo.</p>
+            
+            <p>Gracias por darme la oportunidad... por tu comprensión cuando cometo errores... y por tu amor incondicional que me hace ser mejor persona cada día... No hay segundo en el que no me sienta el hombre más afortunado del mundo por tenerte.</p>
+            
+            <p>Estos 3 meses son solo el comienzo de todo lo que quiero vivir contigo. Prometo amarte, cuidarte y hacerte feliz todos los días de mi vida.</p>
+            
+            <div class="signature">Con todo mi amor,<br>Juanpa</div>
+        </div>
+        
+        <div class="footer">
+            Creado para mi niña hermosa, mi reyna, mi amor...   
+        </div>
+    </div>
+    
+    <script>
+        // Crear corazones flotantes
+        function createHearts() {
+            const heartsContainer = document.getElementById('hearts');
+            const colors = ['#ff6b8b', '#ffb3c1', '#ffccd5', '#ff8fab'];
+            
+            for (let i = 0; i < 20; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.innerHTML = '❤️';
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
+                heart.style.animationDuration = (Math.random() * 10 + 5) + 's';
+                heart.style.animationDelay = Math.random() * 5 + 's';
+                heart.style.color = colors[Math.floor(Math.random() * colors.length)];
+                
+                heartsContainer.appendChild(heart);
+            }
+        }
+        
+        // Iniciar todo cuando la página cargue
+        window.onload = function() {
+            createHearts();
+            
+            // Actualizar el contador de días
+            const startDate = new Date('2025-02-14'); // Fecha de aniversario
+            const today = new Date();
+            const diffTime = Math.abs(today - startDate);
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            
+            document.querySelector('.date-counter').innerHTML = `❤️ ${diffDays} días juntos ❤️`;
+            
+            // Configurar el modal del corazón
+            const photoFrame = document.getElementById('photoFrame');
+            const heartModal = document.getElementById('heartModal');
+            const closeHeart = document.getElementById('closeHeart');
+            
+            photoFrame.addEventListener('click', function() {
+                heartModal.style.display = 'flex';
+                document.body.style.overflow = 'hidden'; // Evitar scroll cuando el modal está abierto
+            });
+            
+            closeHeart.addEventListener('click', function() {
+                heartModal.style.display = 'none';
+                document.body.style.overflow = 'auto'; // Restaurar scroll
+            });
+            
+            // Cerrar modal al hacer clic fuera del contenido
+            heartModal.addEventListener('click', function(e) {
+                if (e.target === heartModal) {
+                    heartModal.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                }
+            });
+        };
+    </script>
+</body>
+</html>
